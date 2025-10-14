@@ -10,7 +10,7 @@ applications:
   
   - name: guestbook
   - name: apache
-   - name: grafana
+   - name: grafana2
     sources:
       # Source 1: The Helm chart itself
       - repoURL: https://grafana.github.io/helm-charts
