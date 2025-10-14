@@ -22,13 +22,7 @@ applications:
         chart: grafana
         targetRevision: 7.3.15 # Use a specific version, e.g., 7.3.15 or 'latest'
       # Source 2: The Git repository for custom values
-      - repoURL: https://github.com/grafana/helm-charts.git
-        targetRevision: HEAD
-        path: charts/grafana/values.yaml
-    # Helm configuration to apply the values file from Source 2 to the chart from Source 1
-    helm:
-      valueFiles:
-        - $values/grafana/grafana.yaml
+     
    
     
   
