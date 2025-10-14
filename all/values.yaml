@@ -1,3 +1,8 @@
+global:
+chartUrl: https://github.com/grafana/helm-charts.git
+valuesServer: https://github.com/jual501/values.git
+
+
 config:
   spec:
     destination:
