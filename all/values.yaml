@@ -23,6 +23,6 @@ applications:
     # Helm parameters to link the chart and the values file
     helm:
       valueFiles:
-        - $values/grafana/grafana.yaml # Referencing the second source by its path
+        - grafana/grafana.yaml # Referencing the second source by its path
   
   
