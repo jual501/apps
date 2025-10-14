@@ -10,5 +10,19 @@ applications:
   
   - name: guestbook
   - name: apache
+   - name: grafana
+    sources:
+      # Source 1: The Helm chart itself
+      - repoURL: https://grafana.github.io/helm-charts
+        chart: grafana
+        targetRevision: 7.3.15 # Use a specific, stable version or 'latest'
+      # Source 2: The custom values file from a Git repository
+      - repoURL: https://github.com/jual501/values.git
+        targetRevision: HEAD
+        path: grafana/grafana.yaml
+    # Helm parameters to link the chart and the values file
+    helm:
+      valueFiles:
+        - $values/grafana/grafana.yaml # Referencing the second source by its path
   
   
