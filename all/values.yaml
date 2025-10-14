@@ -21,8 +21,6 @@ applications:
         targetRevision: HEAD
         path: grafana/grafana.yaml
     # Helm parameters to link the chart and the values file
-    helm:
-      valueFiles:
-        - grafana/grafana.yaml # Referencing the second source by its path
+    
   
   
