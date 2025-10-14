@@ -9,5 +9,6 @@ config:
 applications:
   
   - name: guestbook
+  - name: apache
   
   
