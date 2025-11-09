@@ -1,28 +1,23 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: apache
 spec:
-  replicas: 2
-  revisionHistoryLimit: 3
-  selector:
-    matchLabels:
-      app: apache
   template:
-    metadata:
-      labels:
-        app: apache
     spec:
       containers:
-        - image: httpd:2.4
-          name: apache
+        - name: apache
+          image: httpd:2.4
           ports:
             - containerPort: 80
-volumeMounts:
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          volumeMounts:
+            - name: hello-config-vol
+              mountPath: /opt/hello.txt
+              subPath: hello.txt
+      volumes:
         - name: hello-config-vol
-          mountPath: /opt/hello.txt
-          subPath: hello.txt
-volumes:
-      - name: hello-config-vol
-        configMap:
-          name: hello-config
+          configMap:
+            name: hello-config
