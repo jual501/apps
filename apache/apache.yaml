@@ -18,3 +18,11 @@ spec:
           name: apache
           ports:
             - containerPort: 80
+volumeMounts:
+        - name: hello-config-vol
+          mountPath: /opt/hello.txt
+          subPath: hello.txt
+volumes:
+      - name: hello-config-vol
+        configMap:
+          name: hello-config
