@@ -5,7 +5,6 @@ metadata:
   namespace: apache
 spec:
   replicas: 2
-  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: apache
@@ -19,18 +18,20 @@ spec:
           image: httpd:2.4
           ports:
             - containerPort: 80
-          resources:
-            requests:
-              cpu: 50m
-              memory: 64Mi
-            limits:
-              cpu: 200m
-              memory: 256Mi
+
+          # ENV from Secret -> creates $hello
+          envFrom:
+            - secretRef:
+                name: app-secret
+
+          # File from Secret -> writes key 'hello' to /opt/secret.txt
           volumeMounts:
-            - name: hello-config-vol
-              mountPath: /opt/hello.txt
-              subPath: hello.txt
+            - name: app-secret-vol
+              mountPath: /opt/secret.txt
+              subPath: hello
+              readOnly: true
+
       volumes:
-        - name: hello-config-vol
-          configMap:
-            name: hello-config
+        - name: app-secret-vol
+          secret:
+            secretName: app-secret
