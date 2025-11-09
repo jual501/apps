@@ -19,19 +19,27 @@ spec:
           ports:
             - containerPort: 80
 
-          # ENV from Secret -> creates $hello
+          # Env vars from Secret (creates $hello)
           envFrom:
             - secretRef:
                 name: app-secret
 
-          # File from Secret -> writes key 'hello' to /opt/secret.txt
           volumeMounts:
+            # ConfigMap -> /opt/hello.txt
+            - name: hello-config-vol
+              mountPath: /opt/hello.txt
+              subPath: hello.txt
+              readOnly: true
+            # Secret -> /opt/secret.txt
             - name: app-secret-vol
               mountPath: /opt/secret.txt
               subPath: hello
               readOnly: true
 
       volumes:
+        - name: hello-config-vol
+          configMap:
+            name: hello-config
         - name: app-secret-vol
           secret:
             secretName: app-secret
