@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-config
+  namespace: apache
+data:
+  hello.txt: |
+    Hello from the Apache app!  👋
+    This file was injected via ConfigMap.
